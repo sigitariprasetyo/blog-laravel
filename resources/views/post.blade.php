@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.main')
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SAP Blog | Post</title>
-</head>
+@section('container')
+    <article>
+      <h1>{{$post["title"]}}</h1>
+      <h6>By:{{$post["author"]}}</h6>
+      <p>{{$post["body"]}}</p>
+    </article>
 
-<body>
-  <h2>Halaman Post</h2>
-</body>
-
-</html>
+    <a href="/blog">Back To Posts</a>
+@endsection
