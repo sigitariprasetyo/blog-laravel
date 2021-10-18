@@ -21,18 +21,12 @@ class Post
 
     public static function all()
     {
-        return self::$blog_posts;
+        return collect(self::$blog_posts);
     }
 
     public static function getPost($slug)
     {
-        $blog_post = [];
-        foreach (self::$blog_posts as $post) {
-            if ($post["slug"] === $slug) {
-                $blog_post = $post;
-            };
-        }
-
-        return $blog_post;
+        $posts = static::all();
+        return $posts->firstWhere('slug', $slug);
     }
 };
