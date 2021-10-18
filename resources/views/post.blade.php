@@ -1,10 +1,9 @@
 @extends('layouts.main')
 
 @section('container')
-    <article>
-      <h1>{{$post["title"]}}</h1>
-      <h6>By:{{$post["author"]}}</h6>
-      <p>{{$post["body"]}}</p>
+    <article class="mb-4">
+      <h2>{{$post->title}}</h2>
+      {!!$post->body!!}
     </article>
 
     <a href="/blog">Back To Posts</a>
