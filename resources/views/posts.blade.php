@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-  <h2 class="mb-3">{{$page}}</h2>
+  <h2 class="mb-3">{{$title}}</h2>
 
   @foreach ($posts as $post)
       <article class="mb-3 border-bottom pb-3">
