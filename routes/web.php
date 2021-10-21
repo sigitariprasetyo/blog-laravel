@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home', [
-        "title" => "Home"
+        "title" => "Home",
+        "active" => 'home',
     ]);
 });
 
@@ -28,23 +29,34 @@ Route::get('/about', function () {
         "title" => "About",
         "name" => "Sigit Ari Prasetyo",
         "email" => "sigit@gmail.com",
-        "image" => "sap.jpeg"
+        "image" => "sap.jpeg",
+        "active" => 'about',
     ]);
 });
 
-Route::get('/blog', [PostController::class, 'index']);
+Route::get('/posts', [PostController::class, 'index']);
 Route::get('/post/{post:slug}', [PostController::class, 'post']);
 
 Route::get('/category/{category:slug}', function (Category $category) {
     return view('posts', [
         "title" => "Post by Category : $category->name",
-        "posts" => $category->posts->load('author', 'category')
+        "posts" => $category->posts->load('author', 'category'),
+        "active" => 'posts',
     ]);
 });
 
 Route::get('/author/{author:username}', function (User $author) {
     return view('posts', [
         "title" => "Post by Author : $author->name",
-        "posts" => $author->posts->load('author', 'category')
+        "posts" => $author->posts->load('author', 'category'),
+        "active" => 'posts',
+    ]);
+});
+
+Route::get('/categories', function () {
+    return view('categories', [
+        "title" => "Post Categories",
+        "active" => "categories",
+        "categories" => Category::all()
     ]);
 });

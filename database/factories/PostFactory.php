@@ -25,9 +25,9 @@ class PostFactory extends Factory
             'title' => $this->faker->sentence(mt_rand(5, 8)),
             'slug' => $this->faker->sentence(5),
             'excerpt' => $this->faker->unique()->sentence(mt_rand(15, 25)),
-            'body' => $this->faker->paragraph(20, 50),
+            'body' => collect($this->faker->paragraphs(mt_rand(5, 10)))->map(fn ($p) => "<p>$p</p>")->implode(''),
             'user_id' => mt_rand(1, 5),
-            'category_id' => mt_rand(1, 2)
+            'category_id' => mt_rand(1, 3)
         ];
     }
 }
