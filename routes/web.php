@@ -37,22 +37,6 @@ Route::get('/about', function () {
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/post/{post:slug}', [PostController::class, 'post']);
 
-Route::get('/category/{category:slug}', function (Category $category) {
-    return view('posts', [
-        "title" => "Post by Category : $category->name",
-        "posts" => $category->posts->load('author', 'category'),
-        "active" => 'posts',
-    ]);
-});
-
-Route::get('/author/{author:username}', function (User $author) {
-    return view('posts', [
-        "title" => "Post by Author : $author->name",
-        "posts" => $author->posts->load('author', 'category'),
-        "active" => 'posts',
-    ]);
-});
-
 Route::get('/categories', function () {
     return view('categories', [
         "title" => "Post Categories",
