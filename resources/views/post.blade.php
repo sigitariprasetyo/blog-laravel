@@ -16,7 +16,7 @@
           {!!$post->body!!}
         </article>
 
-        <a href="/blog">Back To Posts</a>
+        <a href="/posts">Back To Posts</a>
       </div>
     </div>
   </div>
