@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DashboardPostsController;
+use App\Http\Controllers\DashbordController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
@@ -47,6 +49,18 @@ Route::get('/categories', function () {
     ]);
 });
 
-Route::get('/login', [LoginController::class, 'index']);
-Route::get('/register', [RegisterController::class, 'index']);
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
+
+Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
+
+Route::get('/dashboard', function () {
+    return view('dashboard.index', [
+        'title' => 'Dashboard',
+        'active' => 'dashboard'
+    ]);
+})->middleware('auth');
+
+Route::resource('/dashboard/posts', DashboardPostsController::class);
