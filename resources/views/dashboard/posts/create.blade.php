@@ -6,27 +6,51 @@
   </div>
 
   <div class="col-lg-8">
-    <form action="/dashboard/posts" method="POST">
+    <form action="/dashboard/posts" method="POST" class="mb-5">
       @csrf
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
-        <input type="text" name="title" class="form-control" id="title">
+        <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" value="{{old('title')}}">
+        @error('title')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+        @enderror
       </div>
       <div class="mb-3">
         <label for="slug" class="form-label">Slug</label>
-        <input type="text" name="slug" class="form-control" id="slug">
+        <input type="text" name="slug" class="form-control @error('slug') is-invalid @enderror" id="slug" value="{{old('slug')}}">
+        @error('slug')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+        @enderror
       </div>
       <div class="mb-3">
         <label for="category" class="form-label">Category</label>
-        <select class="form-select">
+        <select class="form-select @error('category') is-invalid @enderror" name="category">
           @foreach ($categories as $category)
+          @if (old('category') == $category->id)
+            <option value="{{$category->id}}" selected>{{$category->name}}</option>
+          @else
             <option value="{{$category->id}}">{{$category->name}}</option>
+          @endif
           @endforeach
         </select>
+        @error('category')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+        @enderror
       </div>
       <div class="mb-3">
         <label for="body" class="form-label">Body</label>
-        <input id="body" type="hidden" name="body">
+        @error('body')
+          <p class="text-danger">
+            {{ $message }}
+          </p>
+        @enderror
+        <input id="body" type="hidden" name="body" value="{{old('body')}}">
         <trix-editor input="body"></trix-editor>
       </div>
       <button type="submit" class="btn btn-primary">Create Post</button>
