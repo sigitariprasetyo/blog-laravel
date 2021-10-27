@@ -27,10 +27,10 @@
         @enderror
       </div>
       <div class="mb-3">
-        <label for="category" class="form-label">Category</label>
-        <select class="form-select @error('category') is-invalid @enderror" name="category">
+        <label for="category_id" class="form-label">Category</label>
+        <select class="form-select @error('category_id') is-invalid @enderror" name="category_id">
           @foreach ($categories as $category)
-          @if (old('category') == $category->id)
+          @if (old('category_id') == $category->id)
             <option value="{{$category->id}}" selected>{{$category->name}}</option>
           @else
             <option value="{{$category->id}}">{{$category->name}}</option>
@@ -68,9 +68,3 @@
     })
   </script>
 @endsection
-
-{{-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum maxime a consequuntur itaque adipisci doloribus iusto incidunt aspernatur assumenda possimus harum dignissimos culpa porro vel dolorum perferendis delectus in, corrupti fuga quis necessitatibus. 
-
-Nulla sint autem impedit explicabo cum, vero deserunt ratione, eius soluta, cupiditate quibusdam ullam atque! Explicabo repellat adipisci rerum quaerat distinctio sit, eligendi veniam laborum repellendus totam, illum vitae placeat consequuntur similique doloremque porro deserunt consectetur amet molestias?
-
-Molestiae similique, voluptate aperiam perferendis iusto pariatur aut deserunt earum veniam perspiciatis fugit possimus, labore quam officia nisi qui nihil, veritatis porro. Dignissimos animi veniam libero, neque culpa quia? --}}
