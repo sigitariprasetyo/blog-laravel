@@ -25,7 +25,14 @@
 
   @if ($posts->count())
     <div class="card mb-3">
-      <img src="https://source.unsplash.com/1200x300?{{$posts[0]->category->name}}" width="1200" height="300" class="card-img-top img-fluid bg-secondary d-block" alt="{{$posts[0]->category->name}}" loading="lazy">
+      @if ($posts[0]->image)
+      <div style="height: 300px;overflow:hidden">
+        <img src="{{asset('storage/'.$posts[0]->image)}}" alt="{{$posts[0]->category->name}}" class="img-fluid bg-secondary d-block"loading="lazy">
+      </div>
+      @else
+        <img src="https://source.unsplash.com/1200x300?{{$posts[0]->category->name}}" width="1200" height="300" class="card-img-top img-fluid bg-secondary d-block" alt="{{$posts[0]->category->name}}" loading="lazy">
+      @endif
+
       <div class="card-body text-center">
         <h3 class="card-title"><a href="/post/{{$posts[0]->slug}}" class="text-decoration-none text-dark">{{$posts[0]->title}}</a></h3>
         <p class="card-text"><small class="text-muted">By <a href="/posts?author={{$posts[0]->author->username}}" class="text-decoration-none "> {{$posts[0]->author->name}}</a> in <a href="/posts?category={{$posts[0]->category->slug}}" class="text-decoration-none "> {{$posts[0]->category->name}}</a> {{$posts[0]->created_at->diffForHumans()}}</small></p>
@@ -41,7 +48,12 @@
         <div class="col-md-4 mb-3">
           <div class="card">
             <a href="/posts?category={{$post->category->slug}}"><small class="position-absolute px-3 py-1 text-light" style="background-color: rgb(0, 0, 0,0.7)">{{$post->category->name}}</small><a>
-            <img src="https://source.unsplash.com/500x300?{{$post->category->name}}" width="500" height="300" class="card-img-top img-fluid bg-secondary d-block" alt="{{$post->category->name}}" loading="lazy">
+            @if ($post->image)
+              <img src="{{asset('storage/'.$post->image)}}" alt="{{$post->category->name}}" style="object-fit: fill" class="img-fluid bg-secondary d-block" loading="lazy">
+            @else
+              <img src="https://source.unsplash.com/500x300?{{$post->category->name}}" width="500" height="300" class="card-img-top img-fluid bg-secondary d-block" alt="{{$post->category->name}}" loading="lazy">
+            @endif
+            
             <div class="card-body">
               <h5 class="card-title"><a href="/post/{{$post->slug}}" class="text-decoration-none text-dark">{{$post->title}}</a></h5>
               <p class="card-text"><small class="text-muted">By <a href="/posts?author={{$post->author->username}}" class="text-decoration-none "> {{$post->author->name}}</a> {{$post->created_at->diffForHumans()}}</small></p>

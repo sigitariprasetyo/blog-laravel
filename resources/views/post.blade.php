@@ -10,7 +10,13 @@
           <a href="/posts?category={{$post->category->slug}}" class="text-decoration-none">{{$post->category->name}}</a>
         </p>
 
-        <img src="https://source.unsplash.com/1200x300?{{$post->category->name}}" alt="{{$post->category->name}}" height="300" width="1200"  class="img-fluid bg-secondary d-block" loading="lazy">
+        @if ($post->image)
+          <div style="height :300px;overflow:hidden">
+            <img src="{{asset('storage/'.$post->image)}}" height="300" alt="{{$post->category->name}}"  class="img-fluid bg-secondary d-block" loading="lazy">
+          </div>
+        @else
+          <img src="https://source.unsplash.com/1200x300?{{$post->category->name}}" alt="{{$post->category->name}}" height="300" width="1200"  class="img-fluid bg-secondary d-block" loading="lazy">
+        @endif
 
         <article class="my-4">
           {!!$post->body!!}
