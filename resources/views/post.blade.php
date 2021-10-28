@@ -10,7 +10,7 @@
           <a href="/posts?category={{$post->category->slug}}" class="text-decoration-none">{{$post->category->name}}</a>
         </p>
 
-        <img src="https://source.unsplash.com/1200x300?{{$post->category->name}}" alt="{{$post->category->name}}" sizes="1200x400" class="img-fluid">
+        <img src="https://source.unsplash.com/1200x300?{{$post->category->name}}" alt="{{$post->category->name}}" height="300" width="1200"  class="img-fluid bg-secondary d-block" loading="lazy">
 
         <article class="my-4">
           {!!$post->body!!}
